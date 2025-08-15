@@ -1,32 +1,57 @@
-# department_distribution.py
 import pandas as pd
 import matplotlib.pyplot as plt
-import mpld3
 
-# Your email for verification
-email = "23f3003731@ds.study.iitm.ac.in"
+# Email for verification
+print("23f3003731@ds.study.iitm.ac.in")
 
 # Sample dataset
-data = pd.DataFrame({
-    "employee_id": ["EMP001","EMP002","EMP003","EMP004","EMP005","EMP006","EMP007","EMP008","EMP009","EMP010"],
-    "department": ["IT","Finance","R&D","IT","R&D","IT","Finance","IT","R&D","IT"],
-    "region": ["Europe","Africa","Africa","Middle East","Europe","Asia","Europe","Africa","Asia","Europe"]
-})
+data = """employee_id,department,region,performance_score,years_experience,satisfaction_rating
+EMP001,IT,Europe,88.92,3,3.5
+EMP002,Finance,Africa,71.95,1,4.9
+EMP003,R&D,Africa,92.5,12,3.1
+EMP004,IT,Middle East,79.05,8,4.8
+EMP005,R&D,Europe,87.83,15,4.3
+EMP006,IT,Europe,85.12,4,4.5
+EMP007,Finance,Asia,73.45,6,3.9
+EMP008,IT,Asia,81.33,7,4.1
+EMP009,IT,Europe,90.21,10,4.7
+EMP010,Finance,Europe,76.58,2,4.0
+EMP011,IT,Asia,88.45,9,3.8
+EMP012,R&D,Middle East,91.78,11,4.6
+EMP013,Finance,Europe,79.65,3,4.2
+EMP014,IT,Europe,82.33,6,3.9
+EMP015,IT,Africa,77.95,5,4.4
+"""
 
-# Calculate frequency count for IT
-it_count = data['department'].value_counts().get('IT', 0)
-print(f"Frequency count for IT department: {it_count}")  # This must appear in HTML as text too
+# Load data into a DataFrame
+from io import StringIO
+df = pd.read_csv(StringIO(data))
 
-# Plot histogram
-fig, ax = plt.subplots()
-data['department'].value_counts().plot(kind='bar', color="#66c2a5", ax=ax)
-ax.set_title(f"Department Distribution of Employees (IT count = {it_count})")
-ax.set_xlabel("Department")
-ax.set_ylabel("Number of Employees")
+# Count the number of employees in IT
+it_count = df[df['department'] == 'IT'].shape[0]
+print(f"Frequency count for IT department: {it_count}")
 
-# Export as interactive HTML using mpld3
-html_str = mpld3.fig_to_html(fig)
+# Create histogram
+plt.figure(figsize=(8,5))
+df['department'].value_counts().plot(kind='bar', color='skyblue')
+plt.title('Department Distribution')
+plt.xlabel('Department')
+plt.ylabel('Number of Employees')
+plt.tight_layout()
+
+# Save as HTML
+html_content = f"""
+<html>
+<head><title>Department Distribution</title></head>
+<body>
+<h2>Department Distribution Histogram</h2>
+<p>Frequency count for IT department: {it_count}</p>
+<img src="department_distribution.png" alt="Department Distribution">
+</body>
+</html>
+"""
+
+plt.savefig("department_distribution.png")
+
 with open("department_distribution.html", "w") as f:
-    f.write(html_str)
-    # Append your email to HTML for verification
-    f.write(f"<p>Email: {email}</p>")
+    f.write(html_content)
