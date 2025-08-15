@@ -1,0 +1,6 @@
+employee_id,department,region,performance_score,years_experience,satisfaction_rating
+EMP001,IT,Europe,88.92,3,3.5
+EMP002,Finance,Africa,71.95,1,4.9
+EMP003,R&D,Africa,92.5,12,3.1
+EMP004,IT,Middle East,79.05,8,4.8
+EMP005,R&D,Europe,87.83,15,4.3
