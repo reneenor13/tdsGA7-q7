@@ -1,24 +1,56 @@
-<!DOCTYPE html>
+import pandas as pd
+import matplotlib.pyplot as plt
+from io import StringIO
+
+# Email for verification
+print("23f3003731@ds.study.iitm.ac.in")
+
+# Sample dataset
+data = """employee_id,department,region,performance_score,years_experience,satisfaction_rating
+EMP001,IT,Europe,88.92,3,3.5
+EMP002,Finance,Africa,71.95,1,4.9
+EMP003,R&D,Africa,92.5,12,3.1
+EMP004,IT,Middle East,79.05,8,4.8
+EMP005,R&D,Europe,87.83,15,4.3
+EMP006,IT,Europe,85.12,4,4.5
+EMP007,Finance,Asia,73.45,6,3.9
+EMP008,IT,Asia,81.33,7,4.1
+EMP009,IT,Europe,90.21,10,4.7
+EMP010,Finance,Europe,76.58,2,4.0
+EMP011,IT,Asia,88.45,9,3.8
+EMP012,R&D,Middle East,91.78,11,4.6
+EMP013,Finance,Europe,79.65,3,4.2
+EMP014,IT,Europe,82.33,6,3.9
+EMP015,IT,Africa,77.95,5,4.4
+"""
+
+# Load data
+df = pd.read_csv(StringIO(data))
+
+# Count IT department
+it_count = df[df['department'] == 'IT'].shape[0]
+print(f"Frequency count for IT department: {it_count}")
+
+# Create histogram
+plt.figure(figsize=(8,5))
+df['department'].value_counts().plot(kind='bar', color='skyblue')
+plt.title('Department Distribution')
+plt.xlabel('Department')
+plt.ylabel('Number of Employees')
+plt.tight_layout()
+plt.savefig("department_distribution.png")
+
+# HTML with IT count in it
+html_content = f"""
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Department Distribution of Employees</title>
-    <script src="https://mpld3.github.io/js/mpld3.v0.3.js"></script>
-</head>
+<head><title>Department Distribution</title></head>
 <body>
-    <h2>Department Distribution of Employees</h2>
-    <div id="fig_div"></div>
-    <script type="text/javascript">
-        (function(){ 
-            var fig = {"axes":[{"bbox":[[80.0,60.0],[600.0,400.0]],"position":[0.125,0.125,0.775,0.775],
-            "xlim":[-0.5,2.5],"ylim":[0,5.5],"xlabel":"Department","ylabel":"Number of Employees",
-            "title":"Department Distribution of Employees (IT count = 5)","xticks":[0,1,2],"xticklabels":["Finance","IT","R&D"],
-            "yticks":[0,1,2,3,4,5],"yticklabels":["0","1","2","3","4","5"],
-            "elements":[{"type":"bar","data":[2,5,3],"color":["#66c2a5","#66c2a5","#66c2a5"]}]
-            }]}
-            mpld3.draw_figure("fig_div", fig);
-        })();
-    </script>
-    <p>Email: 23f3003731@ds.study.iitm.ac.in</p>
+<h2>Department Distribution Histogram</h2>
+<p><strong>Frequency count for IT department: {it_count}</strong></p>
+<img src="department_distribution.png" alt="Department Distribution">
 </body>
 </html>
+"""
+
+with open("department_distribution.html", "w") as f:
+    f.write(html_content)
