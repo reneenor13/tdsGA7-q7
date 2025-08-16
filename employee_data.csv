@@ -1,6 +1,7 @@
-employee_id,department,region,performance_score,years_experience,satisfaction_rating
-EMP001,IT,Europe,88.92,3,3.5
-EMP002,Finance,Africa,71.95,1,4.9
-EMP003,R&D,Africa,92.5,12,3.1
-EMP004,IT,Middle East,79.05,8,4.8
-EMP005,R&D,Europe,87.83,15,4.3
+employee_id,name,department,region,performance_score,years_experience,salary
+1,John Smith,IT,North,85,5,75000
+2,Sarah Johnson,Finance,South,92,8,85000
+3,Mike Brown,HR,East,78,3,55000
+4,Lisa Davis,IT,West,88,6,80000
+5,Tom Wilson,Marketing,North,82,4,65000
+[... 95 more rows with varied departments like IT, Finance, HR, Marketing, Operations, Sales across different regions]
