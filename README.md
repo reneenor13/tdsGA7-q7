@@ -1,48 +1,34 @@
 # tdsGA7-q7
-# Employee Department Distribution Visualization
+# Employee Performance Analysis - Department Distribution
 
-This project demonstrates a simple data visualization of employee department distributions using Python, pandas, seaborn, and mpld3. The interactive visualization is saved as an HTML file for web deployment.
+This project analyzes employee performance data for a Finance company operating across multiple regions. The analysis focuses on departmental distributions to support strategic workforce planning decisions.
 
----
+## Project Overview
+- **Objective**: Analyze employee performance data to understand departmental distributions
+- **Dataset**: 100 employees across different departments and regions
+- **Target Audience**: Executive team for strategic workforce planning
 
-## Dataset
+## Files Description
+- `employee_data.csv` - Raw employee dataset
+- `employee_visualization.py` - Python analysis and visualization code
+- `department_distribution.html` - Web-ready visualization for presentation
+- `README.md` - Project documentation
 
-`employee_data.csv` contains information about 100 employees across departments and regions. Columns:
+## Requirements
+- Python 3.x
+- pandas
+- matplotlib
+- seaborn
 
-- `employee_id` – Unique identifier  
-- `department` – Employee department (IT, Finance, R&D, etc.)  
-- `region` – Geographic region  
-- `performance_score` – Performance score  
-- `years_experience` – Years of experience  
-- `satisfaction_rating` – Satisfaction rating  
+## Usage
+1. Run the Python script: `python employee_visualization.py`
+2. View the web visualization: Open `department_distribution.html` in a browser
+3. Deploy to GitHub Pages for sharing with stakeholders
 
-Sample:
+## Key Findings
+- IT department frequency count: [to be filled after analysis]
+- Department distribution visualization shows resource allocation patterns
+- Insights support recruitment and strategic planning decisions
 
-employee_id,department,region,performance_score,years_experience,satisfaction_rating
-EMP001,IT,Europe,88.92,3,3.5
-EMP002,Finance,Africa,71.95,1,4.9
-EMP003,R&D,Africa,92.5,12,3.1
-EMP004,IT,Middle East,79.05,8,4.8
-EMP005,R&D,Europe,87.83,15,4.3
-
-
----
-
-## Python Script
-
-**employee_visualization.py**:
-
-1. Loads the dataset  
-2. Prints frequency of IT department employees  
-3. Creates a department distribution histogram  
-4. Saves the visualization as `department_distribution.html`  
-
-**Verification Email:** 23f3003731@ds.study.iitm.ac.in
-
----
-
-## How to Run
-
-```bash
-pip install pandas matplotlib seaborn mpld3
-python employee_visualization.py
+## Contact
+Analysis performed for HR department workforce planning initiative.
