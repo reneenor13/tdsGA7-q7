@@ -1,57 +1,58 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Email for verification
-print("23f3003731@ds.study.iitm.ac.in")
+# Email for verification: 23f3003731@ds.study.iitm.ac.in
 
-# Sample dataset
-data = """employee_id,department,region,performance_score,years_experience,satisfaction_rating
-EMP001,IT,Europe,88.92,3,3.5
-EMP002,Finance,Africa,71.95,1,4.9
-EMP003,R&D,Africa,92.5,12,3.1
-EMP004,IT,Middle East,79.05,8,4.8
-EMP005,R&D,Europe,87.83,15,4.3
-EMP006,IT,Europe,85.12,4,4.5
-EMP007,Finance,Asia,73.45,6,3.9
-EMP008,IT,Asia,81.33,7,4.1
-EMP009,IT,Europe,90.21,10,4.7
-EMP010,Finance,Europe,76.58,2,4.0
-EMP011,IT,Asia,88.45,9,3.8
-EMP012,R&D,Middle East,91.78,11,4.6
-EMP013,Finance,Europe,79.65,3,4.2
-EMP014,IT,Europe,82.33,6,3.9
-EMP015,IT,Africa,77.95,5,4.4
-"""
+def load_and_analyze_data():
+    """Load employee data and perform department analysis"""
+    
+    # Load the dataset
+    df = pd.read_csv('employee_data.csv')
+    
+    # Calculate frequency count for IT department
+    it_count = df[df['department'] == 'IT'].shape[0]
+    print(f"Frequency count for IT department: {it_count}")
+    
+    # Create department distribution visualization
+    plt.figure(figsize=(12, 8))
+    
+    # Create histogram of departments
+    department_counts = df['department'].value_counts()
+    
+    # Create a professional-looking histogram
+    sns.set_style("whitegrid")
+    colors = sns.color_palette("viridis", len(department_counts))
+    
+    plt.figure(figsize=(14, 8))
+    bars = plt.bar(department_counts.index, department_counts.values, color=colors)
+    
+    # Styling for executive presentation
+    plt.title('Employee Distribution Across Departments\nFinance Company Workforce Analysis', 
+              fontsize=18, fontweight='bold', pad=20)
+    plt.xlabel('Department', fontsize=14, fontweight='bold')
+    plt.ylabel('Number of Employees', fontsize=14, fontweight='bold')
+    
+    # Add value labels on bars
+    for bar, count in zip(bars, department_counts.values):
+        plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5, 
+                str(count), ha='center', va='bottom', fontweight='bold')
+    
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    
+    # Save the plot
+    plt.savefig('department_distribution.png', dpi=300, bbox_inches='tight')
+    plt.show()
+    
+    return df, it_count, department_counts
 
-# Load data into a DataFrame
-from io import StringIO
-df = pd.read_csv(StringIO(data))
-
-# Count the number of employees in IT
-it_count = df[df['department'] == 'IT'].shape[0]
-print(f"Frequency count for IT department: {it_count}")
-
-# Create histogram
-plt.figure(figsize=(8,5))
-df['department'].value_counts().plot(kind='bar', color='skyblue')
-plt.title('Department Distribution')
-plt.xlabel('Department')
-plt.ylabel('Number of Employees')
-plt.tight_layout()
-
-# Save as HTML
-html_content = f"""
-<html>
-<head><title>Department Distribution</title></head>
-<body>
-<h2>Department Distribution Histogram</h2>
-<p>Frequency count for IT department: {it_count}</p>
-<img src="department_distribution.png" alt="Department Distribution">
-</body>
-</html>
-"""
-
-plt.savefig("department_distribution.png")
-
-with open("department_distribution.html", "w") as f:
-    f.write(html_content)
+if __name__ == "__main__":
+    # Contact email: 23f3003731@ds.study.iitm.ac.in
+    df, it_count, dept_counts = load_and_analyze_data()
+    
+    print("\nDepartment Distribution Summary:")
+    print(dept_counts)
+    
+    print(f"\nTotal employees analyzed: {len(df)}")
+    print(f"IT department represents {(it_count/len(df)*100):.1f}% of workforce")
