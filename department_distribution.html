@@ -106,6 +106,7 @@
 
         <div class="python-code">
             <h3>Python Code Used for Analysis</h3>
+            <pre><code class="language-python">
 # Employee Performance Analysis - Python Code
 # Contact: 23f3003731@ds.study.iitm.ac.in
 
@@ -165,7 +166,41 @@ if __name__ == "__main__":
     
     print(f"\nTotal employees analyzed: {len(df)}")
     print(f"IT department represents {(it_count/len(df)*100):.1f}% of workforce")
+            </code></pre>
         </div>
+
+        <script type="text/python">
+# Employee Performance Analysis - Python Code  
+# Email: 23f3003731@ds.study.iitm.ac.in
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the dataset
+df = pd.read_csv('employee_data.csv')
+
+# Calculate frequency count for IT department
+it_count = df[df['department'] == 'IT'].shape[0]
+print(f"Frequency count for IT department: {it_count}")
+
+# Create histogram showing distribution of departments
+department_counts = df['department'].value_counts()
+
+plt.figure(figsize=(10, 6))
+plt.bar(department_counts.index, department_counts.values)
+plt.title('Employee Distribution Across Departments')
+plt.xlabel('Department')
+plt.ylabel('Number of Employees')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# Print results
+print("\nDepartment Distribution:")
+for dept, count in department_counts.items():
+    print(f"{dept}: {count}")
+        </script>
     </div>
 
     <!-- Additional Python code in HTML comments for verification -->
